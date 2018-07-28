@@ -1,0 +1,29 @@
+var kafka = require('kafka-node'),
+    HighLevelProducer = kafka.HighLevelProducer,
+    client = new kafka.Client(),
+    producer = new HighLevelProducer(client),
+    payloads = [
+        { topic: topic_name1, messages: message1 },
+        { topic: topic_name2, messages: message2 }
+    ];
+producer.on('ready', function () {
+    producer.send(payloads, function (err, data) {
+        console.log(data);
+    });
+});
+
+    HighLevelConsumer = kafka.HighLevelConsumer,
+    client = new kafka.Client(),
+    consumer = new HighLevelConsumer(
+        client,
+        [
+            { topic: 'topic1' }, { topic: 'topic2' }
+        ],
+        {
+            groupId: 'my-group'
+        }
+    );
+
+consumer.on('message', function (message) {
+    console.log(message);
+}); 
