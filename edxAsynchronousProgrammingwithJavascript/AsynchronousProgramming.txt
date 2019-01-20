@@ -1,0 +1,71 @@
+Asynchronous Programming
+Asynchronous Programming is achieved in JavaScript by using Web APIs that process code on separate threads. The Web API's send their processed results back as tasks on the event queue. These tasks are defined by callback functions passed into the Web APIs. This allows JavaScript to achieve multi-threading in a single threaded run time.
+
+Synchronous vs Asynchronous Programming
+Imagine trying to run a slow task synchronously. It will take a long time to finish processing and will prevent other tasks from running.
+
+Notice how the slowTask() takes a long time to process and prevents other fast tasks from processing:
+==================================================
+function slowTask(){
+    /*takes 2 seconds to process*/
+    var now = new Date().getTime();
+    while(new Date().getTime() < now + 2000){ /* processing */ } 
+
+
+    console.log("slow task finished");
+}
+
+function fastTask(){
+    console.log("fast task finished")
+}
+
+fastTask();
+slowTask()
+fastTask();
+fastTask();
+fastTask();
+
+/*  Console Output:
+    > "fast task finished"
+    ....2 seconds later
+    > "slow task finished"
+    > "fast task finished"
+    > "fast task finished"
+    > "fast task finished"
+
+*/
+==================================================
+
+Asynchronous programming is great because it prevents slow tasks from blocking faster tasks from processing. Asynchronous code will only run when the call stack is empty.
+
+Notice how asynchronous code prevents slow tasks from blocking other faster tasks: 
+
+function slowTask(){
+
+    console.log("slow task finished");
+}
+
+function asyncSlowTask(val){ 
+    setTimeout(slowTask,2000); //finishes in two seconds, but is processed on a separate thread
+}
+
+function fastTask(){
+    console.log("fast task finished!")
+}
+
+fastTask();
+asyncSlowTask();
+fastTask();
+asyncSlowTask();
+fastTask();
+fastTask();
+
+/*  Console Output:
+    > "fast task finished" <--faster tasks were processed first
+    > "fast task finished"
+    > "fast task finished"
+    > "fast task finished"
+    > "slow task finished" <--slow tasks were processed separately and didn't block the call stack
+    > "slow task finished"
+*/
+==================================================

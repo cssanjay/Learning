@@ -1,0 +1,4 @@
+Why POINTERS?
+
+	Now that you know what a pointer is, you may be wondering why you need them. One reason for using pointers is application performance.  In our simple examples thus far, the amount of data that we have passed into functions has been small.  But if we were using large data structures, as class files can sometimes be, or if need to perform repetitive operations on lookup tables, then it is far more efficient to pass a pointer, which is just the memory address, than it is to pass the entire data structure.
+	Pointers also allow you to dynamically allocate memory in your application

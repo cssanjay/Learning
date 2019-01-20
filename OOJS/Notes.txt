@@ -1,0 +1,25 @@
+JS doesn’t have a .delete(index) for arrays. The best way is to delete array[index], but that actually just replaces the value at array[index] with undefined. By using splice we can actually delete elements from an array.
+
+var myArray = ['this', 'is', 'an', 'array'];
+myArray.splice(3, 0, 'amazingly', 'awesome'); // []
+console.log(myArray); // ['this', 'is', 'an', 'amazingly', 'awesome', 'array']
+
+Bitwise operators treat numbers as if they were 32-bit signed integers.
+
+
+
+
+CASSANDRA::
+In addition, any copies that are in conflict are repaired at the time of the read. This is known in Cassandra parlance as read-repair.
+
+fully consistent:
+	R + W >N
+for lower latency:
+	R + W <= N
+
+
+The process of introducing a new node into a Cas-
+sandra cluster is referred to as bootstrapping and is
+usually accomplished in one of two ways.
+1. The first is to configure the node to bootstrap itself to a particular token which dictates its placement within the ring.
+2.A second common way to bootstrap a new node is for the cluster to select a token dictating this nodes placement in the ring. The goal of the election is to choose a token for the new node that will make it responsible for approximately half of the data on the node with the most data that does not already have another node bootstrapping into its range.

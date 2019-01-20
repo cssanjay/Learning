@@ -6,7 +6,7 @@ let f = function(){
 	this.b = 2;
 }
 
-let o = neew f();
+let o = new f();
 
 f.prototype.b = 3;
 f.prototype.c = 4;

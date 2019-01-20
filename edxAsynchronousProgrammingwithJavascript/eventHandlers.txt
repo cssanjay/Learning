@@ -1,0 +1,147 @@
+DOM Events
+DOM Event Listeners happen in parallel with the JavaScript run time. When an event occurs, the event listener detects the event and executes an event handler to put a task on the event queue. The task will eventually make its way to the call stack to be executed.
+
+If multiple events are detected, multiple tasks will be put on the event queue in the order in which they occurred. When the call stack is empty, the first task on the event queue is pushed onto the call stack. When this task finishes, the cycle continues and the next task on the event queue is pushed onto the call stack. Thus, if a certain task takes a long time to finish, the tasks behind it on the event queue will have to wait.
+
+Types of HTML DOM Events
+Here are some examples of HTML DOM Events:
+
+Click Event - occurs when a user clicks a DOM element
+Mouseenter Event - occurs when a pointer is moved over an element
+Mouseleave Event - occurs when a pointer is moved out of an element
+Keypress Event - occurs when a key is pressed
+Referencing DOM Elements
+DOM elements can be referenced using the document.getElementById(id) method call if the DOM element has an id attribute defined.
+
+Notice how a HTML DOM element is referenced in JavaScript:
+
+HTML:
+
+<button id="myId">Button</button>
+JavaScript:
+
+var button = document.getElementById('myId');
+addEventListener()
+The addEventListener(eventType,eventHandler) method call is used to add an event listener to a DOM object. The eventType argument is a string that represents the type of event that is being listened for. The eventHandler is a callback function that handles the event once it is detected.
+
+Notice how the document.getElementById() and addEventListener() method calls are used to reference a DOM element and add an event listener to it.
+
+HTML:
+
+<button id="myId">Button</button>
+JavaScript:
+
+document.getElementById('myId').addEventListener('eventType', function(){
+    //handle event here
+});  
+
+
+
+Event Attributes
+DOM elements have event attributes that can be used to handle events.
+
+Here are several of the attributes that can act as event attributes:
+
+onclick - handles click events
+onmouseover - handles mouseover events
+onmouseleave - handles mouseleave events
+onkeypress - handles keypress events
+The general format for the name of the event attributes is: "on" + "eventType". Event handler functions can be assigned to the event attributes to handle events.
+
+Notice how an event handler function is assigned to an event attribute:
+
+HTML:
+
+<button id="myId">Button</button>
+JavaScript:
+
+document.getElementById('myId').oneventname = function(){
+    //do something
+}
+The event attribute can also be assigned in the HTML code.
+
+Notice how the event attribute can be assigned in HTML:
+
+HTML:
+
+<button id="myId" oneventname = "eventHandler()" >Button</button>
+JavaScript:
+
+function eventHandler(){
+    //do something
+}
+
+Handling Click Events
+Notice how the addEventListener() function is used to add a click event handler to a button DOM element:
+
+HTML:
+
+<button id="mybutton">Click</button>
+JavaScript:
+
+var value = 0;
+
+document.getElementById('myButton').addEventListener('click', function(){
+    value++;
+    document.getElementById('myButton').innerHTML = value;
+   //sets the HTML text inside the button to display the number of times it has been clicked
+});  
+The above code adds a click event listener that increments the value variable every time the button is clicked. The value of the value variable is then displayed inside the button.
+
+The click event can also be handled with an event attribute.
+
+Notice how an anonymous event handler is assigned to the "onclick" event attribute:
+
+var value = 0;
+
+document.getElementById('myButton').onclick = function(){
+    value++;
+    document.getElementById('myButton').innerHTML = value;
+   //sets the HTML text inside the button to display the number of times it has been clicked
+}
+The click event can also be handled by defining the event attribute in HTML.
+
+Notice how the the handleClick() event handler is assigned to the "onclick" event attribute in HTML:
+
+HTML:
+
+<button id="myButton" onclick = "handleClick()">click </button>
+JavaScript:
+
+var value = 0;
+
+function handleClick(){
+    value++;
+    document.getElementById('myButton').innerHTML = value;
+    //sets the HTML text inside the button to display the number of times it has been clicked
+}
+
+
+Handling Keypress Events
+Notice how the addEventListener() method can be used to handle keypress events:
+
+HTML:
+
+<p id="text">Key Pressed: <p>
+JavaScript:
+
+document.addEventListener('keypress',handleKeyPress);
+
+function handleKeyPress(event){
+    var keyPressed= event.key; //event.key contains the key that was pressed
+    document.getElementById("text").innerHTML = "Key Pressed: " +  keyPressed;
+    //sets the HTML text to display the key pressed
+} 
+In the above code, an event listener is added directly to the document DOM element. The document object is the root node where all of the other HTML elements stem from. When a key is pressed, the key will be displayed in the paragraph element. The first argument of the event handler will contain the Event object being handled. The key attribute contains the value of the key that was last pressed.
+
+The keypress event can also be handled using an event attribute.
+
+Notice how the the handleKeyPress() event handler is assigned to the "onkeypress" event attribute:
+
+document.onkeypress = handleKeyPress;
+
+function handleKeyPress(event){
+    var keyPressed= event.key; //event.key contains the key that was pressed
+    document.getElementById("text").innerHTML = "Key Pressed: " +  keyPressed;
+    //sets the HTML text to display the key pressed
+} 
